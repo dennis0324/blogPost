@@ -1,3 +1,3 @@
-```
-*testing*
+```c
+int a = "testing"
 ```
