@@ -3,13 +3,13 @@
 # 블로그 디자인 기록
    
 --//
-..first link{first}
-..second link{second}
-..third link{third}
+..first link{+first+}
+..second link{+second+}
+..third link{+third+}
 //--
 
 
-{first}
+{+first+}
 처음 시작했을 때는 별 생각 없이 시작했던 것 같다. 
 
 나름 디자인에 자신있다고 생각했던 것 같은데 막상 해보니깐 그렇지도 않은 것 같다는 생각이 들었다. 2022년 2월 초에 시작하게 된 블로그 만들기는
