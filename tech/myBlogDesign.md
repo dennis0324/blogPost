@@ -32,9 +32,16 @@
 ![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/myBlogDesign/design4.png?raw=true)
 ![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/myBlogDesign/design5.png?raw=true)
 
-내가 만든 게임이 있었다면 사진과 같이 블로그를 만들었겠지만 만든 게임이 없어서 아쉬울 따름이다.
 
-만들면서 그냥 심플하게 만들기로 결심했다. 
+![alt text](https://jekyllthemes.io/images/themes/simples-jekyll-theme.webp?_cchid=eccad4a7c25f449a0df27824207f324b)
+>[original website](https://jekyllthemes.io/theme/simples-blog-jekyll-theme)
+
+위에 이미지는 내가 구글링 하다가 발견한 사진으로 필자가 봤을 때는 깔끔해보이는 사이트 디자인이라고 생각하였다.
+그래서 이것저것 찾아보니 사이트가 더 다채워지는 요소 중 하나가 사진의 유무라는 것을 디자인을 찾아보다가 느끼게 되었다.
+
+내가 만든 게임이 있었다면 사진과 같이 블로그를 만들었겠지만 만든 게임이 없어서 아쉬울 따름이다. 
+
+사진이 없기에 만들면서 그냥 심플하게 만들기로 결심했다. 
 
 어짜피 코딩과 공부 기록 목적이라면 알록달록 이쁜 것도 좋겠지만, 많은 색깔이 들어가는 걸 안 좋아하는 나로써는
 단순한 색과 단순한 디자인이 더 마음에 끌렸기에 이렇게 디자인한것 같다.
