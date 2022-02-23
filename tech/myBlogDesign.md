@@ -114,6 +114,7 @@ const testing = await octokit.repos.getContent({
 
 이렇게 하니까 정상적으로 출력하는 것을 볼 수 있었다.
 ![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/myBlogDesign/restapiresult.png?raw=true)
+
 이렇게 만들고 보니 글에서의 목차가 보이지 않다는 것을 깨달아버렸다.
 그래서 고심하다가 나름 나만의 정의 만들어서 목차를 웹사이트 쪽에서 자동으로 생성하게 만들기로 하였다.
 
@@ -185,6 +186,11 @@ first link{+first+}..second link{+second+}..third link{+third+}
 그리고 이동하고 싶은 부분에 삽입하면 그 쪽에 있는 p라인에다가도 클래스를 넣는 방식이라고 생각하면 된다.
 
 이렇게 해서 tech 목차에 사용할 rest api 부분은 대충 다 만들었다.
+
+
+사실 디자인이 먼저라고 생각 하는 분들도 있을 것이라고 생각했지만 솔직히 api쪽 먼저 하고 받아오는 형식을 먼저 정하고 나중에 디자인을 정하는 것이 낫다는 생각이 들어
+먼저 한 것이다. 디자인들도 여러가지 생각해봤지만 아직 딱 정해진 것 없는 것 같다. 항상 디자인으로 스트레스 받는 것 같다.
+
 
 
 
