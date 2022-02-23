@@ -54,3 +54,5 @@
  >최종 디자인
 ![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/myBlogDesign/finaldesign.png?raw=true)
 
+이렇게 해서 대문 디자인을 대충 끝난 상태였지만, 아직 프로젝트 페이지에 들어갈 rest api 와 디자인을 만들지 못하였다. 물론 tech 페이지도 말이다...
+
