@@ -67,6 +67,8 @@
 그래서 예전에 이 블로그 제작 전에 너무 장황하게 만들어 놔서 아무것도 못하고 그냥 방치해둔 react로 만들던 프로젝트가 있는데 거기서 사용한 [octokit]를 사용하고자 한다. 
 
 ```js
+//fileName: post.js
+
 const octokit = new Octokit({auth: `token my PRIVARYCODE`})
 ```
 로 시작해서 rest api를 사용하여 github에서 데이터를 불러올 생각이다.
@@ -81,7 +83,110 @@ export const getPost = async (menuName) => {
       ...
 ```
 위에 코드는 나의 깃허브 페이지에서 blogPost라는 repository에서 데려오는 것이다. 
+이를 통해서 불러 들인 포스트한 게시글들을 처음 테크 목차에 들어가면 무엇에 들어갈 것인지 결정해주는 역할이라고 생각하면 될것 같다.
+
+```js
+   ...
+const testing = await octokit.repos.getContent({
+      owner:"dennis0324",
+      repo:"blogPost",
+      path: "tech/myBlogDesign.md"
+    })
+    ...
+```
+
+이 코드는 올린 글 목록을 보는 것이 아닌 올린 글의 내용들을 다시 불러오는 것이다.
+여기서 불러온 코드는 아래의 코드로 디코딩을 한 번 거쳐서 출력된다.
+
+```js
+    let decoded = Base64.decode(testing.data.content);
+```
+
+필자는 이 구간에서 생각보다 많이 헤메였다. 처음에 md 파일이 무슨 형식으로 인코딩 되어있는지도 자세히 몰랐고, 심지어 한글이 utf-8 형식이라 unicode에 맞지 않아 한글이 깨져서 나오는 것이다.
+그래서 여기서 힘좀 많이 들였다.
+
+
+찾아보니 md 파일은 *BASE 64* 로 인코딩 되어있었고 디코딩을 하기 위해서 다른 스크립트 파일을 이용해서 하면 된다는 것을 깨달았다. (필자가 이렇게 짧게 쓰긴 했지만 실력이 부족했어서 나름 오랬동안 찾아봤던 것 같다.)
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.6.1/base64.min.js"></script> <!--base64 해독 역할-->
+```
+
+이렇게 하니까 정상적으로 출력하는 것을 볼 수 있었다.
+![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/myBlogDesign/restapiresult.png?raw=true)
+이렇게 만들고 보니 글에서의 목차가 보이지 않다는 것을 깨달아버렸다.
+그래서 고심하다가 나름 나만의 정의 만들어서 목차를 웹사이트 쪽에서 자동으로 생성하게 만들기로 하였다.
+
+필자가 올린 위에 사진에 첫 라인에 보면 
+```
+--//
+..first link{+first+}
+..second link{+second+}
+..third link{+third+}
+//--
+```
+라는 부분이 있을텐데 이 부분이 목차를 생성할 때 도와주는 부분이라고 생각하면 된다.
+
+
+```js
+    postedIndexs.forEach((val,index) => {
+      if(val.innerHTML.indexOf("--//") >= 0 && val.innerHTML.indexOf("//--") >= 0){
+        var re = /[\n\-\/]/g; //엔터키, --// 또는 //--를 제거한다고 가장 앞에있는 ..를 제거한다.
+        temp = val.innerHTML.replace(re,"").replace("..","")
+        temp = temp.split("..") //..를 분해하여 배열로 설정한다.
+
+        val.remove()
+        
+
+        //각 키와 연결 키를 설정해둔다.
+        temp.forEach((key,index) => {
+          //{+[linkName]+}를 분해하여 만든다.
+          temp[index] = key.replace(/[\{]\s*/g,",").replace(/[\}\+]\s*/g,"").split(",")
+        })
+        console.log(temp)
+      }
+      else{
+        temp.forEach((linkList,index) => {
+          if(val.innerHTML.indexOf("{+"+linkList[1]+"+}") >= 0){
+            console.log(val)
+            const node = document.createElement("div") //div 설정
+            node.classList.add(linkList[1]) //div 생성 및 클래스 생성하여 연결할 링크 설정
+            node.innerHTML = linkList[1] //생성된 div에다가 텍스트 설정후 표시
+            postMenu.appendChild(node) //생성된 div post-menu라는 아이디에다가 추가함
+            val.classList.add("link",linkList[1]) //
+            val.innerHTML = val.innerHTML.replace("{+"+linkList[1]+"+}","")
+            
+          }
+          console.log()
+  
+        })
+      }
+
+    })
+```
+
+사실 실력이 좋지 않아 코드가 이쁘지 않다. 굉장히 난잡하다. 
+그래서 블로그 다 만든 후에 코드 이쁘게 짜는 법좀 공부해 보려고 한다. 항상 만들다 보면 스파게티 코드가 완성되어 나 스스로 스트레스를 너무 많이 받는 것 같다.
+
+사실 위 코드가 하는 행동은 간단하다. rest api에서 받아온 markdown코드를 누가 해석해주냐면 우리 [marked]가 해준다. 
+이 marked가 각 문장마다 h1, p 등등으로 바꾸어서 만들어 주는데 목차를 거의 위에다가 놓아서 사실 목차 찾는 시간이 오래 걸리지 않아 그냥 foreach문으로 돌려버렸다.
+더 좋은 방법이 있다면 찾아봐야겠다...
+
+우선 모던 p를 불러와 '--//' '//--'가 동시에 존재 하는 지 확인하고 확인이 되면 엔터키, -, /를 제거 후 배열을 만들기 쉽게 가장 앞에 있는 ..만 없애준다.
+그러면 
+```
+first link{+first+}..second link{+second+}..third link{+third+}
+```
+이런식으로 나올텐데 여기서 split으로 돌려서 단순히 배열을 제작한 것이다. 사실 더 간단한 방법이 있었지만 나중에 블로그 자체가 아닌 깃허브에서 봐도 헷갈리지 않게 만들기 위해 
+나름대로의 보기 편안한 방법을 찾아서 한 것 같다.
+
+그리고 {이름}를 분해하여 각각 짤라서 배열을 나눠 다시 아까 사용한 배열을 넣어 이중배열을 만들어 줬다.
+그리고 나머지 else부분은 그냥 div 생성하고 안에 텍스트 및 이중배열에서 생성한 클래스 이름을 사용하여 노드 제작 후 index쪽에다가 넣어주는 것이다. 
+그리고 이동하고 싶은 부분에 삽입하면 그 쪽에 있는 p라인에다가도 클래스를 넣는 방식이라고 생각하면 된다.
+
+이렇게 해서 tech 목차에 사용할 rest api 부분은 대충 다 만들었다.
 
 
 
 [octokit]: https://octokit.github.io/rest.js/v18
+[marked]: https://github.com/markedjs/marked
