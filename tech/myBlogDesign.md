@@ -8,7 +8,7 @@
 ..third link{+third+}
 //--
 
-
+## 2022-02-14
 {+first+}
 처음 시작했을 때는 별 생각 없이 시작했던 것 같다. 
 
@@ -56,3 +56,32 @@
 
 이렇게 해서 대문 디자인을 대충 끝난 상태였지만, 아직 프로젝트 페이지에 들어갈 rest api 와 디자인을 만들지 못하였다. 물론 tech 페이지도 말이다...
 
+## 2022-02-23
+
+대문이 얼추 완성 되고 시작되는 tech 파트에 대한 기록이다.
+
+디자인을 하기 전에 그래도 어려운거 먼저 끝내겠다는 마인드를 가지고 rest api를 이용해서 github를 통해 블로그 포스팅을 가져 와야겠다고 생각했다. 
+물론 처음부터는 아니고 같은 대학교 동기 형이 있는데 동기형이 알려줬다. 
+(너무 감사하게 생각하고 있다. 형 아니였으면 NAS로 데이터베이스까지 건드려서 할 뻔했다. 사실 하려고 했다...)
+
+그래서 예전에 이 블로그 제작 전에 너무 장황하게 만들어 놔서 아무것도 못하고 그냥 방치해둔 react로 만들던 프로젝트가 있는데 거기서 사용한 [octokit]를 사용하고자 한다. 
+
+```js
+const octokit = new Octokit({auth: `token my PRIVARYCODE`})
+```
+로 시작해서 rest api를 사용하여 github에서 데이터를 불러올 생각이다.
+
+```js
+export const getPost = async (menuName) => {
+   const path = await octokit.request("GET /repos/{owner}/{repo}/contents/{menu}",{
+         owner:"dennis0324",
+         repo:"blogPost",
+         menu:menuName
+       })
+      ...
+```
+위에 코드는 나의 깃허브 페이지에서 blogPost라는 repository에서 데려오는 것이다. 
+
+
+
+[octokit]: https://octokit.github.io/rest.js/v18
