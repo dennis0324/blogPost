@@ -26,12 +26,17 @@
 나름 다른 디자인들도 만들어 보겠다고 만들던 것들에서 약간식 수정하여 여러 디자인들을 만들어 보았지만,
 디자인에 견문이 넓던 것도 아니였기에 아쉬운 결과가 나온 것 같다.
 
-![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/myBlogDesign/design2.png?raw=true)
+>첫번 째 디자인
+![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/myBlogDesign/design2.png?raw=true)   
 
-![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/myBlogDesign/design3.png?raw=true)
-![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/myBlogDesign/design4.png?raw=true)
-![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/myBlogDesign/design5.png?raw=true)
+>두번 째 디자인
+![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/myBlogDesign/design3.png?raw=true)   
 
+>세번 째 디자인
+![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/myBlogDesign/design4.png?raw=true)   
+
+>네번 째 디자인
+![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/myBlogDesign/design5.png?raw=true)   
 
 ![alt text](https://jekyllthemes.io/images/themes/simples-jekyll-theme.webp?_cchid=eccad4a7c25f449a0df27824207f324b)
 >[original website](https://jekyllthemes.io/theme/simples-blog-jekyll-theme)
@@ -46,4 +51,6 @@
 어짜피 코딩과 공부 기록 목적이라면 알록달록 이쁜 것도 좋겠지만, 많은 색깔이 들어가는 걸 안 좋아하는 나로써는
 단순한 색과 단순한 디자인이 더 마음에 끌렸기에 이렇게 디자인한것 같다.
  
+ >최종 디자인
 ![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/myBlogDesign/finaldesign.png?raw=true)
+
