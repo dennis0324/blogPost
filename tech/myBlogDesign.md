@@ -61,7 +61,7 @@
 대문이 얼추 완성 되고 시작되는 tech 파트에 대한 기록이다.
 
 디자인을 하기 전에 그래도 어려운거 먼저 끝내겠다는 마인드를 가지고 rest api를 이용해서 github를 통해 블로그 포스팅을 가져 와야겠다고 생각했다. 
-물론 처음부터는 아니고 같은 대학교 동기 형이 있는데 동기형이 알려줬다. 
+물론 처음부터는 아니고 같은 대학교 동기 형이 있는데 동기형이 알려줬다. [jdeokkim]
 (너무 감사하게 생각하고 있다. 형 아니였으면 NAS로 데이터베이스까지 건드려서 할 뻔했다. 사실 하려고 했다...)
 
 그래서 예전에 이 블로그 제작 전에 너무 장황하게 만들어 놔서 아무것도 못하고 그냥 방치해둔 react로 만들던 프로젝트가 있는데 거기서 사용한 [octokit]를 사용하고자 한다. 
@@ -196,3 +196,4 @@ first link{+first+}..second link{+second+}..third link{+third+}
 
 [octokit]: https://octokit.github.io/rest.js/v18
 [marked]: https://github.com/markedjs/marked
+[jdeokkim]: https://github.com/jdeokkim
