@@ -191,7 +191,110 @@ first link{+first+}..second link{+second+}..third link{+third+}
 사실 디자인이 먼저라고 생각 하는 분들도 있을 것이라고 생각했지만 솔직히 api쪽 먼저 하고 받아오는 형식을 먼저 정하고 나중에 디자인을 정하는 것이 낫다는 생각이 들어
 먼저 한 것이다. 디자인들도 여러가지 생각해봤지만 아직 딱 정해진 것 없는 것 같다. 항상 디자인으로 스트레스 받는 것 같다.
 
+## 2022 - 02 -25
+막힌 부분이 있어서 하루를 보냈다.
 
+진짜 농담이 아니고 새벽 3시까지 모르는거 있어서 찾아보는 것도 대학교 과제하면서 이후로 오랜만인 것 같다. 
+
+물론 군대를 갔다오면서 군대에서도 코딩을 시간 날 때 마다 했지만, 그래도 이렇게까지 오랫동안 붙잡고 있던 것도 오랜만이다.
+
+사실 더 쉬운 방법이 있다는 것을 알고 있었지만 내 오기가 생겨서 그만 두지 못했다. 컴퓨터를 끄는 것은 새벽 1시에 껐지만, 너무 열받아서 새벽 세시까지 핸드폰으로 뒤져봤다.
+그냥 너무 단순한 문제였는데 너무 힘들게 생각한게 아닌가 싶기도 하다.
+
+중간에 포기하고 그냥 홈페이지 DB를 하나 만들어서 거기다가 저장 해둘까 생각도 했다만... 더 뭔가를 벌리면 완성도 못한다는 생각에 계속 찾아보았던 거 같다.
+
+3시쯤 되어서야 뭐 내가 찾는거랑 비슷한거를 찾은거 같아서 북마크해두고 잤다.
+
+사실 글 작성일 및 업데이트된 날짜를 가져오는 것인데, 파일별로 정리해서 모아둔게 없던 것이다. rest api로는 무리가 있겠다 싶어서 graphql를 사용해서 하려 하니깐
+사실 아무것도 모르는 입장에서는 곤혹일 수 밖에 없었다.
+
+찾아도 내가 원하는 게 아무것도 안 나와서 답답해 죽는 줄 알았다.
+
+아침에 일어나서 결론 지은것은 미리 짜둔 기초 틀에 aliases를 사용하여 가져오는 파일들을 정리해서 가져오자고 계획를 하고 짜기 시작했다.
+
+필자가 작성한 방법이 정론법은 아니지만, 내가 원하는 결과를 도출시켜주는 하나의 과정이기에 일단 올려서 기록에 남긴다.
+
+```js
+ const getData = await octokit.request("GET /repos/{owner}/{repo}/contents/{menu}",{
+   owner:"dennis0324",
+   repo:"blogPost",
+   menu:menuName
+ })
+```
+
+우선 restapi를 사용하여 파일이름을 다 한꺼번에 가져온다.
+
+그리고 그 배열을 바탕으로 qeury 구문을 제작해준다.
+
+```js
+var commits = ``
+
+ pathData.forEach((value,key) => {
+   console.log(value,key)
+   let putData = value[0].replace(".md","") + `: history(path: "`+value[1]+`", first: 100) {
+     edges {
+       node { 
+         committedDate 
+         oid
+         author
+         {  
+           email
+         }
+       } 
+     }
+   }
+   `
+   commits = commits.concat(putData)
+ })
+```
+우선 aliases를 사용할 수 있도록 String으로 이어붙여 내부 query를 만들어 준 후
+
+```js
+    const query = `query RepoFiles($own:String!,$repo:String!){
+      repository(owner: $own, name: $repo) {
+        first: object(expression: "main") {
+          ... on Commit {
+            `+commits+`
+          
+        }
+      }
+    }
+  }
+  `
+
+```
+로 완성한다.
+
+그 후
+
+
+```js
+    const queryValue = {"own":"dennis0324","repo":"blogPost"}
+
+    const endpoint = "https://api.github.com/graphql"
+
+    try{
+      fetch(endpoint,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization':'bearer TOKEN'
+          },
+          body:JSON.stringify({
+            query:query,
+            variables: queryValue
+          })
+        })
+        .then(res=> res.json())
+        .then(json => console.log(json))
+    }
+    catch(e){
+      console.log(e)
+    }
+```
+
+fetch로 graphql를 불러온다. 이렇게 해서 포스트된 글, 포스트된 시간에 사용할 데이터 불러오는 것에 대한 코딩은 다 끝났다.
 
 
 [octokit]: https://octokit.github.io/rest.js/v18
