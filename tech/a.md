@@ -1,5 +1,5 @@
 ---
 {
-"title":"testingPurpose",
+"title":"testingPurpose"
 }
 ---
