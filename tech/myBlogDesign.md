@@ -1,7 +1,9 @@
 
 ---
-title: "블로그 디자인 및 제작"
+{
+title: "블로그 디자인 및 제작",
 tags: [html, javascript, design, studying]
+}
 ---
 
 # 블로그 디자인 기록
