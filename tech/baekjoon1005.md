@@ -161,8 +161,9 @@ void main(){
 그리고 이 행동을 계속 반복해주면 위상정렬이 나오게 된다.
 
 ![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/baekjoon1005/draw4.png?raw=true)
+
 ![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/baekjoon1005/draw5.png?raw=true)
-![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/baekjoon1005/draw6.png?raw=true)
+
 
 많이 생략한 감이 있어 추후에 추가 가능하면 추가하도록 하겠다.
 
