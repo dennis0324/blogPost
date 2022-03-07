@@ -149,7 +149,36 @@ void main(){
 우선 전개도로 나타내면 이렇게 나오게 된다. 그리고 각각의 선들이 몇번째의 칸으로 가게 되는지 기록하면 아래의 배열로 나오게된다.
 
 그리고 배열에서 0인 모든 노드를 찾아서 [큐]안에 넣어준다.
-0인 노드는 하나 밖에 없으니깐 
+0인 노드는 하나 밖에 없으니깐 큐에 0만 넣어주게 된다.
+그 후 노드0번이 어디로 향하는지 찾은 후 배열에서 목표 노드의 카운트를 하나씩 줄여준다.
+
+![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/baekjoon1005/draw2.png?raw=true)
+
+그리고 사용한 노드는 -1로 바꾸어 0인 노드를 검색할때 검색되지 않도록 해준다.
+
+![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/baekjoon1005/draw3.png?raw=true)
+
+그리고 이 행동을 계속 반복해주면 위상정렬이 나오게 된다.
+
+![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/baekjoon1005/draw4.png?raw=true)
+![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/baekjoon1005/draw5.png?raw=true)
+![alt text](https://github.com/dennis0324/blogPost/blob/main/data/pictures/baekjoon1005/draw6.png?raw=true)
+
+많이 생략한 감이 있어 추후에 추가 가능하면 추가하도록 하겠다.
+
+이렇게 계속 풀어가면서 하다보면 결과 배열이 나오게 되는데 사실 결과 배열은 여기서 그렇게 필요하지 않다.
+우리가 원하는건 시작하는 부분과 순서가 중요하기에 배열을 따로 기재하지 않았다.
+
+그러면 아까 맨처음 위에서 언급한 방법을 함께 사용하여 만들 수 있게 된다.
+
+순서는 위상정렬을 하면서 나타나게되니깐 각 노드들에게 자신이 지어지기까지 걸리는 시간을 기본으로 저장해두고 위상정렬을 하면서
+나오는 순서에 맞춰서 서로 더해주면 된다.
+
+그래서 나중에는 원하는 데이터를 그냥 인덱스 값만 입력하면 그 인덱스에 저장되어있던 총 건축시간을 출력만 하면 되는 것이다.
+
+그렇게 해서 만들어진 것이 아래의 코드이다.
+
+
 
 ```c
 #include <stdio.h>
