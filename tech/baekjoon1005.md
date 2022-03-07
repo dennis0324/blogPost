@@ -269,3 +269,4 @@ int main(){
 
 [blog1]: https://m.blog.naver.com/ndb796/221236874984
 [blog2]: https://gmlwjd9405.github.io/2018/08/27/algorithm-topological-sort.html
+[큐]: https://ko.wikipedia.org/wiki/%ED%81%90_(%EC%9E%90%EB%A3%8C_%EA%B5%AC%EC%A1%B0)
