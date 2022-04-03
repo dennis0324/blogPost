@@ -432,28 +432,27 @@ vscode 자체에서 지원해주는 `tasks.json`과 extension으로 react 컴포
 이게 json 설정이다. 빌드를 위해서는 3개의 멸령어가 실행 되어야 한다. typescript에서 javascript으로 변환해주는 컴파일러 그리고 react를 script태그에다가 넣어줄 수 있게 바꿔주는 동작, 마지막으로 electron의 변경마다 hot reload를 시켜주는 동작으로 총 3개인데 하나 씩 실행 시키기 귀찮아서 묶어버렸다.
 
 ```json
-	"tasks": [
-		{
-			"label": "test App",
-			"dependsOn": [
-				"npm: watch",
-				"npm: ts-c",
-				"npm: start"
-			]
-		},
+{
+	"label": "test App",
+	"dependsOn": [
+		"npm: watch",
+		"npm: ts-c",
+		"npm: start"
+	]
+},
 ```
 이건 별거 아니고 그냥 3개의 명령어를 실행 시키기 위해서 한꺼번에 실행을 도와주는 시작이다.
 label은 필자가 한것처럼 안하고 다른 이름으로 작성해도된다. dependsOn은 이름을 바꿀 수 있지만 나머지 tasks들의 label과 이름을 맞춰야한다.
 
 ```json
-		{
-			"type": "shell",
-			"label": "npm: ts-c",
-			"command": "npm run ts-c",
-			"presentation": {
-				"group": "app test component",
-      }
-		}
+{
+	"type": "shell",
+	"label": "npm: ts-c",
+	"command": "npm run ts-c",
+	"presentation": {
+		"group": "app test component",
+	}
+}
       
 ```
 타입스크립트의 컴파일이다.
@@ -471,14 +470,14 @@ label은 필자가 한것처럼 안하고 다른 이름으로 작성해도된다
 react의 변경이 확인되면 실행해서 다시 업데이트 해주는 동작을 해주는 프로세스를 실행해준다.
 
 ```json
-		{
-			"type": "shell",
-			"label": "npm: start",
-			"command": "Start-Sleep -s 5 | npm start",
-			"presentation": {
-				"group": "app test component",
-      }
-		}
+{
+	"type": "shell",
+	"label": "npm: start",
+	"command": "Start-Sleep -s 5 | npm start",
+	"presentation": {
+		"group": "app test component",
+      	}
+}
 ```
 
 
