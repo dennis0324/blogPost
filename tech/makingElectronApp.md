@@ -181,7 +181,7 @@ const env = process.env.NODE_ENV || 'development';
 필요 노드다 3번째 줄은 개발환경에서 실했을때 추후에 추가할 hot reload를 위한 줄이다.
 
 
-```
+```typescript
 function createWindow() {
   const win = new BrowserWindow({
     width: 1200,
