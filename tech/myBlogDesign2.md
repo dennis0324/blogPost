@@ -131,4 +131,56 @@ watch:{
 사실 이 부분을 설명하면 백엔드 부분의 코드도 같이 설명해야한다.
 
 
+```typescript
+app.get('/githubContirbutions/',async (req,res) => {
+    const responseQuery = req.query.startingDate as string
+    const startDate = new Date(responseQuery)
+    const QUERY = `
+                query testing($userName:String!, $toDate:DateTime, $fromDate: DateTime) { 
+                    user(login: $userName) {
+                        contributionsCollection(from: $fromDate, to: $toDate) {
+                            contributionCalendar {
+                                totalContributions
+                                weeks {
+                                    contributionDays {
+                                    weekday
+                                    date 
+                                    contributionCount 
+                                    color
+                                    contributionLevel
+                                    }
+                                }
+                                months  {
+                                    name
+                                    year
+                                    firstDay
+                                    totalWeeks  
+                                }
+                            }
+                        }
+                    }
+                }`;
+    const queryValue = {
+        "userName":"dennis0324",
+        "toDate":new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate(),startDate.getHours(),startDate.getMinutes(),startDate.getSeconds()),
+        "fromDate":new Date(startDate.getFullYear(),startDate.getMonth() - 2,startDate.getDate() + 1,startDate.getHours(),startDate.getMinutes(),startDate.getSeconds())
+    }
+    const endpoint = "https://api.github.com/graphql"
+    let commitDatas = await fetch(endpoint,
+    {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization':`bearer ${GITHUB_TOKEN}`
+        },
+        body:JSON.stringify({
+        query:QUERY,
+        variables: queryValue
+        })
+    })
+    commitDatas = await commitDatas.json()
+    res.send(commitDatas)
+})
+```
 
+위에 코드는 express를 사용한 벡엔드 부분이다. 이렇게 해서 깃허브에서 기여 활동을 받아올 수 있다. 
